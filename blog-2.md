@@ -68,3 +68,59 @@ fetchData()
     console.error("Error:", error);
   });
 ```
+
+### Issues with Promises
+
+## Chaining:
+
+While chaining `.then()` improves readability compared to callbacks, it can still become cumbersome when dealing with multiple asynchronous operations.
+
+## Error Handling:
+
+While `.catch()` handles errors, it can still lead to unclear or repetitive error handling if not managed properly.
+
+## Complexity in Multiple Async Calls:
+
+When you have multiple promises that need to be executed in sequence or in parallel, managing the flow and handling errors in all branches can become complex.
+
+## 4. Enter async/await: The Clean Solution
+
+`async/await` is built on top of promises but takes advantage of modern JavaScript syntax to simplify the handling of asynchronous operations.
+
+### Basic `async/await` Example
+
+```typescript
+async function fetchData(): Promise<string> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const data = "Fetched Data";
+      resolve(data);
+    }, 1000);
+  });
+}
+
+async function getData() {
+  try {
+    const data = await fetchData();
+    console.log("Async/Await received:", data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+getData();
+```
+
+### Benefits of `async/await`
+
+## 1. Synchronous Look & Feel:
+
+The await keyword pauses the execution of the async function until the promise is resolved, so the code looks and behaves like synchronous code—without blocking the main thread.
+
+## 2. Clear Error Handling:
+
+With `try/catch`, you can handle errors in a structured way, similar to synchronous code.
+
+## 3. Avoid Callback Hell:
+
+With `async/await`, the need for deeply nested code vanishes, making it easier to follow complex flows of asynchronous operations.
