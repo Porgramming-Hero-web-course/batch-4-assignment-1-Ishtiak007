@@ -33,3 +33,38 @@ fetchData((data) => {
   console.log("Callback received:", data);
 });
 ```
+
+## Issues with Callbacks
+
+### Callback Hell
+
+With multiple async operations, callbacks can become deeply nested, making the code harder to read and maintain. This often leads to a situation called **callback hell**, where the code becomes complex and difficult to follow.
+
+### Error Handling
+
+Error handling in callbacks is often inconsistent. You need to manually check for errors and propagate them in each callback, leading to messy and brittle code. This makes it difficult to manage errors across multiple async calls.
+
+## 3. Promises for Cleaner Asynchronous Code
+
+Promises were introduced as an improvement over callbacks to make asynchronous code more manageable. Promises allow chaining `.then()` and `.catch()` to handle results and errors, providing a cleaner and more structured approach than callbacks.
+
+### Example of Promise Usage
+
+```typescript
+function fetchData(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const data = "Fetched Data";
+      resolve(data);
+    }, 1000);
+  });
+}
+
+fetchData()
+  .then((data) => {
+    console.log("Promise received:", data);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+```
